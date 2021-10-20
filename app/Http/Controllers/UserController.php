@@ -43,7 +43,8 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        $request->password = bcrypt($request->password);
+        $request->merge(['password' => bcrypt($request->password)]);
+
         user::create($request->all());
 
         return redirect()->route('users.index')
