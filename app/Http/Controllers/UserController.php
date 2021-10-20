@@ -40,9 +40,10 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'family' => 'required',
+            'email' => 'required',
+            'password' => 'required',
         ]);
-
+        $request->password = bcrypt($request->password);
         user::create($request->all());
 
         return redirect()->route('users.index')
@@ -82,7 +83,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'family' => 'required',
+            'email' => 'required',
         ]);
 
         $user->update($request->all());
