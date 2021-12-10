@@ -51,7 +51,7 @@ class TodosController extends Controller
             $todo->desc = $request->desc;
             $todo->status = $request->status == 'on' ? 1 : 0;
             if ($todo->save()) {
-                return view('todos.show', ['todo' => $todo]);
+                return redirect()->route('dashboard');
             }
             return; // 422
         }
@@ -73,7 +73,7 @@ class TodosController extends Controller
         $todo->desc = $request->desc;
         $todo->user_id = Auth::user()->id;
         if ($todo->save()) {
-            return view('todos.show', ['todo' => $todo]);
+            return redirect()->route('dashboard');
         }
 
         return; // 422
