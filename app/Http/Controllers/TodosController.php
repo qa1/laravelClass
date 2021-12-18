@@ -79,13 +79,14 @@ class TodosController extends Controller
         return; // 422
     }
 
-    public function delete(Request $request, $id)
+    public function delete(Todo $todo)
     {
         # code...
-        $todo = Todo::where('user_id', Auth::user()->id)->where('id', $id)->first();
+        //$todo = Todo::where('user_id', Auth::user()->id)->where('id', $id)->first();
+        $this->authorize('delete',$todo);
         if ($todo) {
             $todo->delete();
-            return view('todos.index');
+            return redirect()->route('dashboard');
         }
         return; // 404
     }

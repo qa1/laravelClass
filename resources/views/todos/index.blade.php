@@ -55,7 +55,9 @@
                                             <a href="/todos/{{$todo->id}}" class="bg-green-500">View</a>
                                             @if($todo->user_id == auth()->user()->id)
                                             <a href="{{ route('edit-form', ['id'=>$todo->id]) }}" class="bg-yellow-500">Edit</a>
-                                            <a href="/todos/{{$todo->id}}/delete" class="bg-red-500">Delete</a>
+                                            @can('delete',$todo)
+                                                <a href="/todos/{{$todo->id}}/delete" class="bg-red-500">Delete</a>
+                                            @endcan
                                             @endif
                                         </div>
                                     </td>
